@@ -15,7 +15,4 @@ export default {
   components: { Slide }
 };
 </script>
-<style scoped>
-.home {
-}
-</style>
+<style scoped></style>
