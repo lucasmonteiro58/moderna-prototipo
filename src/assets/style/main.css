@@ -1,5 +1,16 @@
 * {
   color: #4a462a;
+  font-family: SourceSans;
+}
+
+@font-face {
+  font-family: SourceSans;
+  src: url("../fonts/SourceSansPro/SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+  font-family: Maven;
+  src: url("../fonts/MavenPro/MavenPro-Regular.ttf");
 }
 
 /* ------------------Menu-Burger */
