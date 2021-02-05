@@ -1,32 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <img class="bg-top-right" src="./assets/images/bg-top-right.png" />
+    <img class="bg-bottom-left" src="./assets/images/bg-bottom-left.png" />
+    <img class="bg-bottom-right" src="./assets/images/bg-bottom-right.png" />
+    <img class="bg-top-left" src="./assets/images/bg-top-left.png" />
     <router-view />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style lang="scss" scoped>
+.bg-top-left {
+  position: absolute;
+  width: 30%;
+  top: 0;
+  left: 0;
 }
 
-#nav {
-  padding: 30px;
+.bg-top-right {
+  position: absolute;
+  width: 15%;
+  top: 0;
+  right: 0;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.bg-bottom-left {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.bg-bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 35%;
 }
 </style>
