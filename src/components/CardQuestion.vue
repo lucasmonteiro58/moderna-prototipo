@@ -29,10 +29,25 @@
       </div>
       <div class="quention-pergunta">{{ question.pergunta }}</div>
       <div class="question-alternativas">
-        <div class="alternativa-a">{{ question.alternativas.a.text }}</div>
-        <div class="alternativa-b">{{ question.alternativas.b.text }}</div>
-        <div class="alternativa-c">{{ question.alternativas.c.text }}</div>
-        <div class="alternativa-d">{{ question.alternativas.d.text }}</div>
+        <div class="alternativa-a">{{ question.alternativas[0].text }}</div>
+        <div class="alternativa-b">{{ question.alternativas[1].text }}</div>
+        <div class="alternativa-c">{{ question.alternativas[2].text }}</div>
+        <div class="alternativa-d">{{ question.alternativas[3].text }}</div>
+      </div>
+      <div class="qual-item">Qual item você acha ques está correto?</div>
+      <div class="form">
+        <div class="items-options">
+          <div
+            v-for="(item, index) in question.alternativas"
+            :key="index"
+            class="item"
+            @click="checkOption(item.nome)"
+            :class="{ checked: item.checked }"
+          >
+            {{ item.nome }}
+          </div>
+        </div>
+        <button class="btn-conferir">Conferir</button>
       </div>
     </div>
     <!-- <div class="video-section"></div> -->
@@ -70,7 +85,8 @@ export default {
   data() {
     return {
       question,
-      images: [question.imagem.link]
+      images: [question.imagem.link],
+      selected: ""
     };
   },
   methods: {
@@ -79,6 +95,34 @@ export default {
     },
     show() {
       this.$viewer.show();
+    },
+    desmarcar() {
+      for (let i = 0; i < this.question.alternativas.length; i++) {
+        this.question.alternativas[i].checked = false;
+      }
+    },
+    checkOption(nome) {
+      switch (nome) {
+        case "A":
+          this.desmarcar();
+          this.question.alternativas[0].checked = true;
+          break;
+        case "B":
+          this.desmarcar();
+          this.question.alternativas[1].checked = true;
+          break;
+        case "C":
+          this.desmarcar();
+          this.question.alternativas[2].checked = true;
+          break;
+        case "D":
+          this.desmarcar();
+          this.question.alternativas[3].checked = true;
+          break;
+        default:
+          this.desmarcar();
+          break;
+      }
     }
   }
 };
@@ -196,6 +240,61 @@ export default {
         padding: 20px 30px;
         border: 2px solid #4a462ac2;
         border-radius: 1.5vw;
+      }
+    }
+
+    .qual-item {
+      font-family: SourceSansBold;
+      margin-top: 20px;
+    }
+
+    .form {
+      display: flex;
+      justify-content: space-between;
+
+      .items-options {
+        margin-top: 20px;
+        display: flex;
+        width: 350px;
+        justify-content: space-between;
+        align-items: center;
+
+        div {
+          cursor: pointer;
+          font-size: 35px;
+          font-family: SourceSansBold;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background-color: #928c5d;
+          border-radius: 50%;
+          width: 70px;
+          height: 70px;
+
+          &.checked {
+            background-color: #4a462a;
+          }
+        }
+      }
+
+      .btn-conferir {
+        cursor: pointer;
+        margin-top: 20px;
+        background-color: #0087c2;
+        font-family: SourceSansBold;
+        text-transform: uppercase;
+        border-radius: 18px;
+        border: none;
+        font-size: 27px;
+        letter-spacing: 1px;
+        width: 250px;
+        color: white;
+        height: 70px;
+
+        &:hover {
+          background-color: #0075a7;
+        }
       }
     }
   }

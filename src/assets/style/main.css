@@ -9,6 +9,11 @@
 }
 
 @font-face {
+  font-family: SourceSansBold;
+  src: url("../fonts/SourceSansPro/SourceSansPro-Bold.ttf");
+}
+
+@font-face {
   font-family: Maven;
   src: url("../fonts/MavenPro/MavenPro-Regular.ttf");
 }

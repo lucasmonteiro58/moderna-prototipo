@@ -15,26 +15,34 @@ export const question = {
   },
   pergunta:
     "O contexto conturbado vivido pela Europa antes do Congresso de Viena e os resultados deste foram, respectivamente:  ",
-  alternativas: {
-    a: {
+  alternativas: [
+    {
       text:
         "a) A guerra dos sete anos que colocaram em confronto Inglaterra e França em função de disputas territoriais na América. – A expulsão da França da Liga das Nações por ter desrespeitado regras internacionais preestabelecidas. ",
-      correct: false
+      correct: false,
+      nome: "A",
+      checked: false
     },
-    b: {
+    {
       text:
         "b) A disputa imperialista protagonizada pelas nações europeias em função da crise econômica vivida no século XIX. – Evitou-se provisoriamente um conflito de proporções mundiais já que, por meio de concessões, garantiu-se um equilíbrio político. ",
-      correct: false
+      correct: false,
+      nome: "B",
+      checked: false
     },
-    c: {
+    {
       text:
         "c) A expansão napoleônica que destronou reis e promoveu a invasão e ocupação militar sobre diversas regiões. – Restauração das monarquias depostas por Napoleão, legitimação das existentes à época e a criação da Santa Aliança. ",
-      correct: false
+      correct: false,
+      nome: "C",
+      checked: false
     },
-    d: {
+    {
       text:
         "d) A primeira grande guerra, que foi consequência de um momento marcado pelo nacionalismo exacerbado e por rivalidades econômicas e territoriais. – A imposição de uma paz despreocupada com o equilíbrio mundial pois humilhava os derrotados.",
-      correct: false
+      correct: false,
+      nome: "D",
+      checked: false
     }
-  }
+  ]
 };
