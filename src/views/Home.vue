@@ -7,7 +7,7 @@
           <img src="../assets/images/icons/reiniciar.png" />
           <span>Reiniciar</span>
         </div>
-        <div v-if="som" @click="desativarSom">
+        <div v-if="somOn" @click="desativarSom">
           <img src="../assets/images/icons/som-on.png" />
           <span>Som Ativado</span>
         </div>
@@ -15,15 +15,15 @@
           <img src="../assets/images/icons/som-off.png" />
           <span>Som Desativado</span>
         </div>
-        <div>
+        <div @click="openAcessibilidade">
           <img src="../assets/images/icons/acessibilidade.png" />
           <span>Acessibilidade</span>
         </div>
-        <div>
+        <div @click="openAjuda">
           <img src="../assets/images/icons/ajuda.png" />
           <span>Ajuda</span>
         </div>
-        <div>
+        <div @click="openCreditos">
           <img src="../assets/images/icons/creditos.png" />
           <span>Créditos</span>
         </div>
@@ -32,6 +32,11 @@
           <span>Compartilhar</span>
         </div>
       </main>
+      <SubMenu
+        :index="subMenuIndex"
+        :show="showSubMenu"
+        @fecharSubMenu="closeSubMenu"
+      ></SubMenu>
     </Slide>
     <img
       class="logo-page"
@@ -47,17 +52,22 @@
 <script>
 import { Slide } from "vue-burger-menu";
 import CardQuestion from "../components/CardQuestion";
+import SubMenu from "../components/SubMenu";
 export default {
   name: "Home",
-  components: { Slide, CardQuestion },
+  components: { Slide, CardQuestion, SubMenu },
   data() {
     return {
-      som: true
+      showSubMenu: false,
+      subMenuIndex: 0
     };
   },
   computed: {
     lightUp() {
       return this.$store.state.light;
+    },
+    somOn() {
+      return this.$store.state.som;
     }
   },
   methods: {
@@ -66,10 +76,25 @@ export default {
       this.$emit("reiniciar");
     },
     desativarSom() {
-      this.som = !this.som;
+      this.$store.commit("changeSom", !this.somOn);
     },
     closeLight() {
       this.$store.commit("changeLight", true);
+    },
+    openAcessibilidade() {
+      this.showSubMenu = true;
+      this.subMenuIndex = 0;
+    },
+    openAjuda() {
+      this.showSubMenu = true;
+      this.subMenuIndex = 1;
+    },
+    openCreditos() {
+      this.showSubMenu = true;
+      this.subMenuIndex = 2;
+    },
+    closeSubMenu() {
+      this.showSubMenu = false;
     }
   }
 };

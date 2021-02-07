@@ -71,8 +71,28 @@ export default {
     this.$refs.plyr.player.on("ended", () => this.$emit("videoEnd"));
     this.$refs.plyr.player.on("pause", () => this.$emit("videoPause"));
     this.$refs.plyr.player.on("play", () => this.$emit("videoPlay"));
+    this.$refs.plyr.player.on("volumechange", () => this.mutarSom());
+    this.$refs.plyr.player.muted = this.muted;
   },
-  computed: {}
+  computed: {
+    muted() {
+      return !this.$store.state.som;
+    }
+  },
+  watch: {
+    muted: function() {
+      this.$refs.plyr.player.muted = this.muted;
+    }
+  },
+  methods: {
+    mutarSom() {
+      if (this.$refs.plyr.player.muted) {
+        this.$store.commit("changeSom", false);
+      } else {
+        this.$store.commit("changeSom", true);
+      }
+    }
+  }
 };
 </script>
 

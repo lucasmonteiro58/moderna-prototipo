@@ -5,11 +5,15 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    light: true
+    light: true,
+    som: true
   },
   mutations: {
     changeLight(state, newState) {
       state.light = newState;
+    },
+    changeSom(state, newState) {
+      state.som = newState;
     }
   },
   actions: {},
