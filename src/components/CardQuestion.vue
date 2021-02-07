@@ -59,7 +59,7 @@
         </div>
       </div>
       <div class="mid-content">
-        <Video></Video>
+        <Video :current-video="currentVideo"></Video>
         <div v-if="showPopUpVideo" class="popup-video">
           <PopUpVideo @close="closePopUpVideo"></PopUpVideo>
         </div>
@@ -115,7 +115,8 @@ export default {
       index: 2,
       images: [question.imagem.link],
       selected: "",
-      showPopUpVideo: true
+      showPopUpVideo: true,
+      currentVideo: require("../assets/videos/Moderna_002_1.mp4")
     };
   },
   created() {

@@ -2,10 +2,7 @@
   <div class="player-container">
     <vue-plyr ref="plyr">
       <video crossorigin>
-        <source
-          size="720"
-          src="https://media.vued.vanthink.cn/sparkle_your_name_am720p.mp4"
-        />
+        <source size="720" :src="currentVideo" />
       </video>
     </vue-plyr>
   </div>
@@ -64,7 +61,15 @@ Vue.use(VuePlyr, {
   }
 });
 
-export default {};
+export default {
+  name: "Video",
+  props: {
+    currentVideo: {
+      type: String,
+      required: true
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

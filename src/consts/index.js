@@ -46,3 +46,14 @@ export const question = {
     }
   ]
 };
+
+export const videos = {
+  introducao: require("../assets/videos/Moderna_002_1.mp4"),
+  texto: require("../assets/videos/Moderna_002_3.mp4"),
+  enunciado: require("../assets/videos/Moderna_002_6.mp4"),
+  itemA: require("../assets/videos/Moderna_002_7.mp4"),
+  itemB: require(""),
+  itemC: require(""),
+  itemD: require(""),
+  encerramento: require("")
+};
