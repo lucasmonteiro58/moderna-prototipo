@@ -1,6 +1,13 @@
 * {
-  color: #4a462a;
   font-family: SourceSans;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:active {
+  filter: brightness(90%);
 }
 
 @font-face {
@@ -11,6 +18,11 @@
 @font-face {
   font-family: SourceSansBold;
   src: url("../fonts/SourceSansPro/SourceSansPro-Bold.ttf");
+}
+
+@font-face {
+  font-family: SourceSansBlack;
+  src: url("../fonts/SourceSansPro/SourceSansPro-Black.ttf");
 }
 
 @font-face {

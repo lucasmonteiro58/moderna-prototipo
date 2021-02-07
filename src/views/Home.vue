@@ -3,13 +3,17 @@
     <Slide noOverlay>
       <img class="logo-menu" src="../assets/images/logo-moderna.png" />
       <main id="page-wrap">
-        <div>
+        <div @click="reiniciar">
           <img src="../assets/images/icons/reiniciar.png" />
           <span>Reiniciar</span>
         </div>
-        <div>
+        <div v-if="som" @click="desativarSom">
           <img src="../assets/images/icons/som-on.png" />
           <span>Som Ativado</span>
+        </div>
+        <div v-else @click="desativarSom">
+          <img src="../assets/images/icons/som-off.png" />
+          <span>Som Desativado</span>
         </div>
         <div>
           <img src="../assets/images/icons/acessibilidade.png" />
@@ -35,7 +39,7 @@
       alt="logo"
     />
     <div class="center-content">
-      <CardQuestion></CardQuestion>
+      <CardQuestion :reinciar="reiniciar"></CardQuestion>
     </div>
   </div>
 </template>
@@ -45,10 +49,26 @@ import { Slide } from "vue-burger-menu";
 import CardQuestion from "../components/CardQuestion";
 export default {
   name: "Home",
-  components: { Slide, CardQuestion }
+  components: { Slide, CardQuestion },
+  data() {
+    return {
+      som: true
+    };
+  },
+  methods: {
+    reiniciar() {
+      this.$emit("reiniciar");
+    },
+    desativarSom() {
+      this.som = !this.som;
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
+.home {
+  color: #4a462a;
+}
 .center-content {
   display: flex;
   align-items: center;
@@ -71,13 +91,15 @@ export default {
   flex-direction: column;
   justify-content: center;
   margin-top: 50px;
+  color: #4a462a;
 
   div {
     font-size: 22px;
     letter-spacing: 1px;
-    padding: 20px 30px;
+    height: 80px;
     display: flex;
     align-items: center;
+    padding-left: 30px;
     cursor: pointer;
     width: 300px;
 
@@ -86,7 +108,8 @@ export default {
     }
 
     img {
-      margin-right: 20px;
+      margin-right: 30px;
+      width: 30px;
     }
   }
 }

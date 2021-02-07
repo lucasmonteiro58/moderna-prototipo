@@ -1,6 +1,6 @@
 <template>
   <section class="card-question">
-    <!-- <div class="title-section">
+    <div v-if="index === 0" class="title-section">
       <div class="container">
         <div class="title">Congresso de Viena</div>
         <div class="subtitle">- História -</div>
@@ -9,9 +9,10 @@
         class="seta-baixo"
         src="../assets/images/icons/seta-baixo.png"
         alt="baixo"
+        @click="goToQuestion()"
       />
-    </div> -->
-    <div class="question-section">
+    </div>
+    <div v-if="index === 1" class="question-section">
       <div class="enunciado-texto">
         {{ question.enunciado.texto }}
       </div>
@@ -47,10 +48,29 @@
             {{ item.nome }}
           </div>
         </div>
-        <button class="btn-conferir">Conferir</button>
+        <button @click="goToVideo" class="btn-conferir">Conferir</button>
       </div>
     </div>
-    <!-- <div class="video-section"></div> -->
+    <div v-if="index === 2" class="video-section">
+      <div class="left-content">
+        <div class="btn-sair" @click="reiniciar">
+          <img src="../assets/images/icons/btn-sair.png" />
+          <div>SAIR</div>
+        </div>
+      </div>
+      <div class="mid-content">
+        <Video></Video>
+        <div v-if="showPopUpVideo" class="popup-video">
+          <PopUpVideo @close="closePopUpVideo"></PopUpVideo>
+        </div>
+      </div>
+      <div class="right-content">
+        <div class="btn-luz">
+          <img src="../assets/images/icons/luz.png" />
+          <div>LUZ</div>
+        </div>
+      </div>
+    </div>
     <viewer :images="images" @inited="inited" class="viewer" ref="viewer">
       <img v-for="src in images" :src="src" :key="src" class="none" />
     </viewer>
@@ -59,6 +79,8 @@
 
 <script>
 import { question } from "../consts/index";
+import Video from "../components/Video";
+import PopUpVideo from "../components/PopUpVideo";
 
 import "viewerjs/src/css/viewer.scss";
 import Viewer from "v-viewer";
@@ -82,12 +104,22 @@ Viewer.setDefaults({
 
 export default {
   name: "CardQuestion",
+  props: {},
+  components: {
+    Video,
+    PopUpVideo
+  },
   data() {
     return {
       question,
+      index: 2,
       images: [question.imagem.link],
-      selected: ""
+      selected: "",
+      showPopUpVideo: true
     };
+  },
+  created() {
+    this.$parent.$on("reiniciar", this.reiniciar);
   },
   methods: {
     inited(viewer) {
@@ -95,6 +127,18 @@ export default {
     },
     show() {
       this.$viewer.show();
+    },
+    closePopUpVideo() {
+      this.showPopUpVideo = false;
+    },
+    reiniciar() {
+      this.index = 0;
+    },
+    goToQuestion() {
+      this.index = 1;
+    },
+    goToVideo() {
+      this.index = 2;
     },
     desmarcar() {
       for (let i = 0; i < this.question.alternativas.length; i++) {
@@ -136,6 +180,7 @@ export default {
   align-items: center;
   justify-content: center;
   z-index: 10;
+  color: #4a462a;
   .title-section {
     background-color: white;
     display: flex;
@@ -294,6 +339,78 @@ export default {
 
         &:hover {
           background-color: #0075a7;
+        }
+      }
+    }
+  }
+  // ------------------------------
+  .video-section {
+    display: flex;
+
+    height: fit-content;
+    box-shadow: 1px 0px 6px 0px rgba(158, 158, 158, 1);
+    border-radius: 3vw;
+    background-color: white;
+    padding: 0px 0px;
+    font-size: 25px;
+
+    .left-content {
+      display: flex;
+      justify-content: center;
+      width: 90px;
+      .btn-sair {
+        margin-top: 40px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 60px;
+        img {
+          margin-bottom: 5px;
+          width: 25px;
+        }
+        div {
+          font-size: 18px;
+          font-family: SourceSansBold;
+        }
+      }
+    }
+
+    .mid-content {
+      width: 60vw;
+      position: relative;
+
+      .popup-video {
+        position: absolute;
+        background-color: #a7a7a765;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .right-content {
+      display: flex;
+      justify-content: center;
+      width: 90px;
+      .btn-luz {
+        margin-top: 40px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 60px;
+        img {
+          margin-bottom: 5px;
+          width: 25px;
+        }
+        div {
+          font-size: 18px;
+          font-family: SourceSansBold;
         }
       }
     }
