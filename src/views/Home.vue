@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home" :class="{ 'light-off': !lightUp }">
     <Slide noOverlay>
       <img class="logo-menu" src="../assets/images/logo-moderna.png" />
       <main id="page-wrap">
@@ -55,12 +55,21 @@ export default {
       som: true
     };
   },
+  computed: {
+    lightUp() {
+      return this.$store.state.light;
+    }
+  },
   methods: {
     reiniciar() {
+      this.closeLight();
       this.$emit("reiniciar");
     },
     desativarSom() {
       this.som = !this.som;
+    },
+    closeLight() {
+      this.$store.commit("changeLight", true);
     }
   }
 };
@@ -68,6 +77,10 @@ export default {
 <style lang="scss" scoped>
 .home {
   color: #4a462a;
+
+  &.light-off {
+    background-color: #1a180e;
+  }
 }
 .center-content {
   display: flex;

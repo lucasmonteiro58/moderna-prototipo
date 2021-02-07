@@ -1,30 +1,46 @@
 <template>
-  <div class="popup-content">
+  <div class="popup-content" :class="{ 'light-off': !lightUp }">
     <img
       @click="close"
       class="btn-sair"
       src="../assets/images/icons/btn-sair-cinza.png"
     />
     <div v-if="index === 0" class="content-0">
-      <button class="btn-1">Ver a explicação do texto e imagem</button>
-      <button class="btn-2">Pular para enunciado da questão</button>
+      <button @click="goToTexto" class="btn-1">
+        Ver a explicação do texto e imagem
+      </button>
+      <button @click="goToEnunciado" class="btn-2">
+        Pular para enunciado da questão
+      </button>
     </div>
     <div v-if="index === 1" class="content-1">
-      <button class="btn-1">Ver explicação do enunciado</button>
-      <button class="btn-2">Voltar para explicação do texto</button>
+      <button @click="goToEnunciado" class="btn-1">
+        Ver explicação do enunciado
+      </button>
+      <button @click="goToTexto" class="btn-2">
+        Voltar para explicação do texto
+      </button>
     </div>
     <div v-if="index === 2" class="content-2">
       <div class="title">Explicação itens</div>
       <div class="items-options">
-        <div class="alternativa-a">A</div>
-        <div class="alternativa-b">B</div>
-        <div class="alternativa-c">C</div>
-        <div class="alternativa-d">D</div>
+        <div @click="goToItemA" class="alternativa-a">A</div>
+        <div @click="goToItemB" class="alternativa-b">B</div>
+        <div @click="goToItemC" class="alternativa-c">C</div>
+        <div @click="goToItemD" class="alternativa-d">D</div>
       </div>
       <div class="buttons-section">
-        <button class="btn-1">Início Explicação</button>
-        <button class="btn-2">Encerramento</button>
+        <button @click="goToIntroducao" class="btn-1">Início Explicação</button>
+        <button @click="goToEncerramento" class="btn-2">Encerramento</button>
       </div>
+    </div>
+    <div v-if="index === 3" class="content-3">
+      <button @click="goToIntroducao" class="btn-1">
+        Rever explicação completa
+      </button>
+      <button @click="goToSair" class="btn-2">
+        Sair da questão
+      </button>
     </div>
   </div>
 </template>
@@ -32,14 +48,57 @@
 <script>
 export default {
   name: "PopUpVideo",
+  props: {
+    index: {
+      type: Number,
+      default: 0
+    }
+  },
+  created() {},
+
   data() {
-    return {
-      index: 0
-    };
+    return {};
+  },
+  computed: {
+    lightUp() {
+      return this.$store.state.light;
+    }
   },
   methods: {
     close() {
       this.$emit("close");
+      this.closeLight();
+    },
+    closeLight() {
+      this.$store.commit("changeLight", true);
+    },
+    goToTexto() {
+      this.$emit("gotoTexto");
+    },
+    goToEnunciado() {
+      this.$emit("gotoEnunciado");
+    },
+    goToItemA() {
+      this.$emit("gotoItemA");
+    },
+    goToItemB() {
+      this.$emit("gotoItemB");
+    },
+    goToItemC() {
+      this.$emit("gotoItemC");
+    },
+    goToItemD() {
+      this.$emit("gotoItemD");
+    },
+    goToEncerramento() {
+      this.$emit("gotoEncerramento");
+    },
+    goToIntroducao() {
+      this.$emit("gotoIntroducao");
+    },
+    goToSair() {
+      this.$emit("gotoSair");
+      this.closeLight();
     }
   }
 };
@@ -57,6 +116,11 @@ export default {
   font-size: 25px;
   position: relative;
 
+  &.light-off {
+    background-color: #1a180e;
+    box-shadow: 1px 0px 6px 0px rgb(0, 0, 0);
+  }
+
   .btn-sair {
     cursor: pointer;
     position: absolute;
@@ -67,7 +131,8 @@ export default {
   }
 
   .content-0,
-  .content-1 {
+  .content-1,
+  .content-3 {
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -135,6 +200,15 @@ export default {
         background-color: #0087c2;
         border: none;
         border-radius: 14px;
+      }
+    }
+    &.light-off {
+      .content-2 {
+        .items-options {
+          div {
+            color: #1a180e;
+          }
+        }
       }
     }
   }

@@ -51,7 +51,11 @@
         <button @click="goToVideo" class="btn-conferir">Conferir</button>
       </div>
     </div>
-    <div v-if="index === 2" class="video-section">
+    <div
+      v-if="index === 2"
+      class="video-section"
+      :class="{ 'light-off': !lightUp }"
+    >
       <div class="left-content">
         <div class="btn-sair" @click="reiniciar">
           <img src="../assets/images/icons/btn-sair.png" />
@@ -59,13 +63,30 @@
         </div>
       </div>
       <div class="mid-content">
-        <Video :current-video="currentVideo"></Video>
+        <Video
+          :current-video="currentVideo"
+          @videoPlay="videoPlay"
+          @videoPause="videoPause"
+          @videoEnd="videoEnd"
+        ></Video>
         <div v-if="showPopUpVideo" class="popup-video">
-          <PopUpVideo @close="closePopUpVideo"></PopUpVideo>
+          <PopUpVideo
+            @close="closePopUpVideo"
+            :index="indexPopUpVideo"
+            @gotoTexto="goToTexto()"
+            @gotoEnunciado="goToEnunciado()"
+            @gotoItemA="goToItemA()"
+            @gotoItemB="goToItemB()"
+            @gotoItemC="goToItemC()"
+            @gotoItemD="goToItemD()"
+            @gotoEncerramento="goToEncerramento()"
+            @gotoIntroducao="goToIntroducao()"
+            @gotoSair="reiniciar()"
+          ></PopUpVideo>
         </div>
       </div>
       <div class="right-content">
-        <div class="btn-luz">
+        <div class="btn-luz" @click="closeLight">
           <img src="../assets/images/icons/luz.png" />
           <div>LUZ</div>
         </div>
@@ -112,10 +133,10 @@ export default {
   data() {
     return {
       question,
-      index: 2,
+      index: 0,
       images: [question.imagem.link],
-      selected: "",
       showPopUpVideo: false,
+      indexPopUpVideo: 0,
       videos,
       currentVideo: videos.introducao
     };
@@ -123,9 +144,17 @@ export default {
   created() {
     this.$parent.$on("reiniciar", this.reiniciar);
   },
+  computed: {
+    lightUp() {
+      return this.$store.state.light;
+    }
+  },
   methods: {
     inited(viewer) {
       this.$viewer = viewer;
+    },
+    closeLight() {
+      this.$store.commit("changeLight", !this.lightUp);
     },
     show() {
       this.$viewer.show();
@@ -135,6 +164,10 @@ export default {
     },
     reiniciar() {
       this.index = 0;
+      this.currentVideo = this.videos.introducao;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 0;
+      this.$store.commit("changeLight", true);
     },
     goToQuestion() {
       this.index = 1;
@@ -169,6 +202,61 @@ export default {
           this.desmarcar();
           break;
       }
+    },
+    goToIntroducao() {
+      this.currentVideo = this.videos.introducao;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 0;
+    },
+    goToTexto() {
+      this.currentVideo = this.videos.texto;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 1;
+    },
+    goToEnunciado() {
+      this.currentVideo = this.videos.enunciado;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 2;
+    },
+    goToItemA() {
+      this.currentVideo = this.videos.itemA;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 2;
+    },
+    goToItemB() {
+      this.currentVideo = this.videos.itemB;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 2;
+    },
+    goToItemC() {
+      this.currentVideo = this.videos.itemC;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 2;
+    },
+    goToItemD() {
+      this.currentVideo = this.videos.itemD;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 2;
+    },
+    goToEncerramento() {
+      this.currentVideo = this.videos.encerramento;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 3;
+    },
+    goToSair() {
+      this.currentVideo = this.videos.introducao;
+      this.showPopUpVideo = false;
+      this.indexPopUpVideo = 0;
+      this.index = 0;
+    },
+    videoPlay() {
+      console.log("play");
+    },
+    videoPause() {
+      console.log("pause");
+    },
+    videoEnd() {
+      this.showPopUpVideo = true;
     }
   }
 };
@@ -355,6 +443,11 @@ export default {
     background-color: white;
     padding: 0px 0px;
     font-size: 25px;
+
+    &.light-off {
+      background-color: #1a180e;
+      box-shadow: 1px 0px 6px 0px rgb(0, 0, 0);
+    }
 
     .left-content {
       display: flex;

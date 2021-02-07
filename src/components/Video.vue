@@ -1,9 +1,7 @@
 <template>
   <div class="player-container">
     <vue-plyr ref="plyr">
-      <video crossorigin>
-        <source size="720" :src="currentVideo" />
-      </video>
+      <video :src="currentVideo"></video>
     </vue-plyr>
   </div>
 </template>
@@ -68,6 +66,11 @@ export default {
       type: String,
       required: true
     }
+  },
+  mounted() {
+    this.$refs.plyr.player.on("ended", () => this.$emit("videoEnd"));
+    this.$refs.plyr.player.on("pause", () => this.$emit("videoPause"));
+    this.$refs.plyr.player.on("play", () => this.$emit("videoPlay"));
   },
   computed: {}
 };

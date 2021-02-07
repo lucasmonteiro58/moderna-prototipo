@@ -4,8 +4,14 @@ import Vuex from "vuex";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  mutations: {},
+  state: {
+    light: true
+  },
+  mutations: {
+    changeLight(state, newState) {
+      state.light = newState;
+    }
+  },
   actions: {},
   modules: {}
 });
