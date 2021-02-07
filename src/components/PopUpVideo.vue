@@ -67,7 +67,6 @@ export default {
   methods: {
     close() {
       this.$emit("close");
-      this.closeLight();
     },
     closeLight() {
       this.$store.commit("changeLight", true);

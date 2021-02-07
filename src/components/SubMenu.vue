@@ -59,6 +59,7 @@
 
 <script>
 import Switches from "vue-switches";
+
 export default {
   props: {
     index: {

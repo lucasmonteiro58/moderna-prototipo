@@ -27,7 +27,7 @@
           <img src="../assets/images/icons/creditos.png" />
           <span>Créditos</span>
         </div>
-        <div>
+        <div @click="openCompartilhar">
           <img src="../assets/images/icons/compartilhar.png" />
           <span>Compartilhar</span>
         </div>
@@ -36,6 +36,7 @@
         :index="subMenuIndex"
         :show="showSubMenu"
         @fecharSubMenu="closeSubMenu"
+        @openCompartilhar="openCompartilhar"
       ></SubMenu>
     </Slide>
     <img
@@ -46,19 +47,25 @@
     <div class="center-content">
       <CardQuestion :reinciar="reiniciar"></CardQuestion>
     </div>
+    <PopUpCompartilhar
+      :show="showPopUpCompartilhar"
+      @closeCompartilhar="closeCompartilhar"
+    ></PopUpCompartilhar>
   </div>
 </template>
 
 <script>
 import { Slide } from "vue-burger-menu";
 import CardQuestion from "../components/CardQuestion";
+import PopUpCompartilhar from "../components/PopUpCompartilhar";
 import SubMenu from "../components/SubMenu";
 export default {
   name: "Home",
-  components: { Slide, CardQuestion, SubMenu },
+  components: { Slide, CardQuestion, SubMenu, PopUpCompartilhar },
   data() {
     return {
       showSubMenu: false,
+      showPopUpCompartilhar: false,
       subMenuIndex: 0
     };
   },
@@ -74,6 +81,12 @@ export default {
     reiniciar() {
       this.closeLight();
       this.$emit("reiniciar");
+    },
+    openCompartilhar() {
+      this.showPopUpCompartilhar = true;
+    },
+    closeCompartilhar() {
+      this.showPopUpCompartilhar = false;
     },
     desativarSom() {
       this.$store.commit("changeSom", !this.somOn);

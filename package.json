@@ -9,9 +9,11 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "feather-icons": "^4.28.0",
     "v-viewer": "^1.5.1",
-    "vue": "^2.6.11",
+    "vue": "^2.6.12",
     "vue-burger-menu": "^2.0.5",
+    "vue-feather": "^1.1.1",
     "vue-plyr": "^7.0.0",
     "vue-router": "^3.2.0",
     "vue-switches": "^2.0.1",
