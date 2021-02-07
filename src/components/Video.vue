@@ -68,7 +68,8 @@ export default {
       type: String,
       required: true
     }
-  }
+  },
+  computed: {}
 };
 </script>
 

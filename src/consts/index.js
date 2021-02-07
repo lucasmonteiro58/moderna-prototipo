@@ -52,8 +52,8 @@ export const videos = {
   texto: require("../assets/videos/Moderna_002_3.mp4"),
   enunciado: require("../assets/videos/Moderna_002_6.mp4"),
   itemA: require("../assets/videos/Moderna_002_7.mp4"),
-  itemB: require(""),
-  itemC: require(""),
-  itemD: require(""),
-  encerramento: require("")
+  itemB: require("../assets/videos/Moderna_002_11.mp4"),
+  itemC: require("../assets/videos/Moderna_002_15.mp4"),
+  itemD: require("../assets/videos/Moderna_002_19.mp4"),
+  encerramento: require("../assets/videos/Moderna_002_23.mp4")
 };

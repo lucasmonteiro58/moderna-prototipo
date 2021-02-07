@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { question } from "../consts/index";
+import { question, videos } from "../consts/index";
 import Video from "../components/Video";
 import PopUpVideo from "../components/PopUpVideo";
 
@@ -115,8 +115,9 @@ export default {
       index: 2,
       images: [question.imagem.link],
       selected: "",
-      showPopUpVideo: true,
-      currentVideo: require("../assets/videos/Moderna_002_1.mp4")
+      showPopUpVideo: false,
+      videos,
+      currentVideo: videos.introducao
     };
   },
   created() {
