@@ -1,6 +1,6 @@
 <template>
   <section class="card-question">
-    <div v-if="index === 0" class="title-section">
+    <div v-if="index === 0" class="title-section" :class="contrasteOn">
       <div class="container">
         <div class="title">Congresso de Viena</div>
         <div class="subtitle">- História -</div>
@@ -12,7 +12,7 @@
         @click="goToQuestion()"
       />
     </div>
-    <div v-if="index === 1" class="question-section">
+    <div v-if="index === 1" class="question-section" :class="contrasteOn">
       <div class="enunciado-texto">
         {{ question.enunciado.texto }}
       </div>
@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="quention-pergunta">{{ question.pergunta }}</div>
-      <div class="question-alternativas">
+      <div class="question-alternativas" :class="contrasteOn">
         <div class="alternativa-a">{{ question.alternativas[0].text }}</div>
         <div class="alternativa-b">{{ question.alternativas[1].text }}</div>
         <div class="alternativa-c">{{ question.alternativas[2].text }}</div>
@@ -37,7 +37,7 @@
       </div>
       <div class="qual-item">Qual item você acha ques está correto?</div>
       <div class="form">
-        <div class="items-options">
+        <div class="items-options" :class="contrasteOn">
           <div
             v-for="(item, index) in question.alternativas"
             :key="index"
@@ -48,15 +48,17 @@
             {{ item.nome }}
           </div>
         </div>
-        <button @click="goToVideo" class="btn-conferir">Conferir</button>
+        <button @click="goToVideo" class="btn-conferir" :class="contrasteOn">
+          Conferir
+        </button>
       </div>
     </div>
     <div
       v-if="index === 2"
       class="video-section"
-      :class="{ 'light-off': !lightUp }"
+      :class="[!lightUp ? 'light-off' : '', contrasteOn]"
     >
-      <div class="left-content">
+      <div class="left-content" :class="contrasteOn">
         <div class="btn-sair" @click="reiniciar">
           <img src="../assets/images/icons/btn-sair.png" />
           <div>SAIR</div>
@@ -85,7 +87,7 @@
           ></PopUpVideo>
         </div>
       </div>
-      <div class="right-content">
+      <div class="right-content" :class="contrasteOn">
         <div class="btn-luz" @click="closeLight">
           <img src="../assets/images/icons/luz.png" />
           <div>LUZ</div>
@@ -147,6 +149,13 @@ export default {
   computed: {
     lightUp() {
       return this.$store.state.light;
+    },
+    contrasteOn() {
+      if (this.$store.state.contraste) {
+        return "contraste-on";
+      } else {
+        return "";
+      }
     }
   },
   methods: {
@@ -292,12 +301,12 @@ export default {
 
       .title {
         font-family: Maven-Black;
-        font-size: 64px;
+        font-size: 3vw;
         text-align: center;
       }
 
       .subtitle {
-        font-size: 48px;
+        font-size: 2.5vw;
         text-align: center;
       }
     }
@@ -311,6 +320,20 @@ export default {
         margin-top: 38px;
       }
     }
+
+    &.contraste-on {
+      background-color: black;
+      border: 8px solid white;
+
+      .container {
+        border-bottom: 8px solid white;
+        color: white;
+      }
+
+      .seta-baixo {
+        filter: brightness(0) invert(1);
+      }
+    }
   }
 
   .question-section {
@@ -322,8 +345,13 @@ export default {
     border-radius: 3vw;
     background-color: white;
     padding: 80px 150px;
-    font-size: 25px;
+    font-size: 1.4vw;
     overflow: auto;
+
+    &.contraste-on {
+      background-color: black;
+      color: white;
+    }
 
     /* width */
 
@@ -376,6 +404,12 @@ export default {
         border: 2px solid #4a462ac2;
         border-radius: 1.5vw;
       }
+
+      &.contraste-on {
+        div {
+          border: 2px solid white;
+        }
+      }
     }
 
     .qual-item {
@@ -411,6 +445,17 @@ export default {
             background-color: #4a462a;
           }
         }
+
+        &.contraste-on {
+          div {
+            background-color: white;
+            color: black;
+
+            &.checked {
+              background-color: rgb(71, 71, 71);
+            }
+          }
+        }
       }
 
       .btn-conferir {
@@ -430,6 +475,15 @@ export default {
         &:hover {
           background-color: #0075a7;
         }
+
+        &.contraste-on {
+          background-color: yellow;
+          color: black;
+
+          &:hover {
+            background-color: rgb(212, 212, 3);
+          }
+        }
       }
     }
   }
@@ -444,6 +498,10 @@ export default {
     padding: 0px 0px;
     font-size: 25px;
 
+    &.contraste-on {
+      background-color: black;
+    }
+
     &.light-off {
       background-color: #1a180e;
       box-shadow: 1px 0px 6px 0px rgb(0, 0, 0);
@@ -453,6 +511,10 @@ export default {
       display: flex;
       justify-content: center;
       width: 90px;
+
+      &.contraste-on {
+        filter: brightness(0) invert(1);
+      }
       .btn-sair {
         margin-top: 40px;
         cursor: pointer;
@@ -492,6 +554,10 @@ export default {
       display: flex;
       justify-content: center;
       width: 90px;
+
+      &.contraste-on {
+        filter: brightness(0) invert(1);
+      }
       .btn-luz {
         margin-top: 40px;
         cursor: pointer;
@@ -533,5 +599,139 @@ export default {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+@media (max-width: 1025px) {
+  .title-section {
+    width: 60vw !important;
+  }
+
+  .card-question .title-section .container .title {
+    font-size: 48px;
+  }
+
+  .card-question .question-section .enunciado-fonte {
+    font-size: 12px;
+  }
+
+  .card-question .question-section .enunciado-acesso {
+    font-size: 12px;
+  }
+
+  .card-question .question-section .imagem .imagem-font {
+    font-size: 12px;
+  }
+
+  .card-question .question-section {
+    padding: 50px 70px;
+  }
+
+  .card-question .question-section .form .items-options {
+    width: 253px;
+  }
+
+  .card-question .question-section .form .items-options div {
+    font-size: 25px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .card-question .question-section .form .btn-conferir {
+    font-size: 23px;
+    width: 222px;
+    height: 54px;
+  }
+
+  .card-question .video-section .left-content .btn-sair img {
+    width: 18px;
+  }
+
+  .card-question .video-section .left-content .btn-sair div {
+    font-size: 15px;
+  }
+
+  .card-question .video-section .right-content .btn-luz img {
+    width: 18px;
+  }
+
+  .card-question .video-section .right-content .btn-luz div {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 769px) {
+  .card-question .title-section {
+    width: 75vw !important;
+    height: 245px;
+  }
+
+  .card-question .title-section .seta-baixo {
+    width: 96px;
+    margin-top: 23px;
+    margin-bottom: 10px;
+  }
+
+  .card-question .question-section {
+    padding: 40px 40px;
+  }
+
+  .card-question .question-section .enunciado-fonte {
+    font-size: 10px;
+  }
+
+  .card-question .question-section .enunciado-acesso {
+    font-size: 10px;
+  }
+
+  .card-question .question-section .imagem {
+    margin-top: 43px;
+  }
+
+  .card-question .question-section .imagem .imagem-font {
+    font-size: 10px;
+  }
+
+  .card-question .question-section .quention-pergunta {
+    margin-top: 42px;
+  }
+
+  .card-question .question-section .question-alternativas div {
+    padding: 13px 20px;
+  }
+
+  .card-question .question-section .form .items-options {
+    width: 190px;
+  }
+
+  .card-question .question-section .form .items-options div {
+    font-size: 21px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .card-question .question-section .form .btn-conferir {
+    font-size: 19px;
+    width: 192px;
+    height: 45px;
+  }
+
+  .card-question .video-section .left-content .btn-sair img {
+    width: 13px;
+  }
+
+  .card-question .video-section .right-content .btn-luz img {
+    width: 11px;
+  }
+
+  .card-question .video-section .left-content .btn-sair {
+    margin-top: 24px;
+  }
+
+  .card-question .video-section .right-content .btn-luz {
+    margin-top: 24px;
+  }
+}
+
+@media (min-width: 426px) {
 }
 </style>

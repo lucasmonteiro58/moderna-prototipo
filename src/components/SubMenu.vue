@@ -1,5 +1,5 @@
 <template>
-  <div class="submenu" :class="{ 'no-show': !show }">
+  <div class="submenu" :class="[!show ? 'no-show' : '', contrasteOn]">
     <slot v-if="index === 0">
       <div class="title" @click="closeSubMenu">
         <img class="voltar" src="../assets/images/icons/back-menu.png" />
@@ -80,6 +80,20 @@ export default {
       legenda: false
     };
   },
+  computed: {
+    contrasteOn() {
+      if (this.$store.state.contraste) {
+        return "contraste-on";
+      } else {
+        return "";
+      }
+    }
+  },
+  watch: {
+    altoContraste(newValue) {
+      this.$store.commit("changeContraste", newValue);
+    }
+  },
   methods: {
     closeSubMenu() {
       this.$emit("fecharSubMenu");
@@ -93,12 +107,16 @@ export default {
   position: absolute;
   top: 120px;
   left: 0;
-  height: 85vh;
+  height: 468px;
   width: 300px;
   background-color: white;
   display: flex;
   flex-direction: column;
   transition: 0.4s;
+
+  &.contraste-on {
+    background-color: black;
+  }
 
   &.no-show {
     transition: 0.4s;
@@ -169,6 +187,39 @@ export default {
       color: #4a462a;
       margin-bottom: 12px;
     }
+  }
+}
+
+.contraste-on {
+  .title {
+    color: white !important;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+
+    &:hover {
+      color: black;
+      background-color: #b8b7ad;
+    }
+  }
+
+  .options {
+    color: white;
+  }
+
+  .atalhos {
+    .title-comando {
+      color: white;
+    }
+
+    p {
+      color: white;
+    }
+  }
+
+  .content {
+    color: white;
   }
 }
 </style>

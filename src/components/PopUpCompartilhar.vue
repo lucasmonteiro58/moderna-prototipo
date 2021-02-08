@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show" class="card-compartilhe">
+  <div v-show="show" class="card-compartilhe" :class="contrasteOn">
     <div class="card">
       <img
         @click="closeCompartilhar"
@@ -28,6 +28,15 @@ export default {
     show: {
       type: Boolean,
       default: false
+    }
+  },
+  computed: {
+    contrasteOn() {
+      if (this.$store.state.contraste) {
+        return "contraste-on";
+      } else {
+        return "";
+      }
     }
   },
   methods: {
@@ -101,6 +110,37 @@ export default {
       opacity: 0.6;
       width: 20px;
     }
+  }
+}
+
+.contraste-on {
+  .card {
+    background-color: black;
+
+    img {
+      filter: brightness(0) invert(1);
+    }
+
+    .title-compartilhe {
+      color: white;
+    }
+
+    button {
+      background-color: yellow;
+      color: black;
+    }
+  }
+}
+
+@media (max-width: 1025px) {
+  .card-compartilhe .card {
+    width: 43vw;
+  }
+}
+
+@media (max-width: 769px) {
+  .card-compartilhe .card {
+    width: 55vw;
   }
 }
 </style>

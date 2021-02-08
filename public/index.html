@@ -20,10 +20,12 @@
   </body>
   <style>
     /* ------------------Menu-Burger */
+
+    
     .bm-burger-button {
       position: fixed;
-      width: 36px;
-      height: 30px;
+      width: 30px;
+      height: 26px;
       left: 0px;
       top: 36px;
       cursor: pointer;
@@ -84,6 +86,32 @@
       margin-left: 10px;
       font-weight: 700;
       color: #4a462a;
+    }
+
+    .contraste-on > div > .bm-menu{
+      background-color: black;
+      color: white;
+      box-shadow: 1px 0px 6px 0px #474747;
+    }
+
+    .contraste-on > div > .bm-burger-button > .bm-burger-bars{
+      background-color: black;
+    }
+
+    .contraste-on > div > .bm-menu > .bm-item-list > img  {
+      filter: brightness(0) invert(1);
+    }
+
+    .contraste-on > div > .bm-menu > .bm-item-list > #page-wrap  {
+      color: white;
+    }
+
+    .contraste-on > div > .bm-menu > .bm-item-list > #page-wrap > :hover  {
+      background-color: #b8b7ad;
+    }
+ 
+    .contraste-on > div > .bm-menu > .bm-item-list > #page-wrap > div > img  {
+      filter: brightness(0) invert(1);
     }
     /* ------------------Menu-Burger */
   </style>

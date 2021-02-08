@@ -1,6 +1,6 @@
 <template>
-  <div class="home" :class="{ 'light-off': !lightUp }">
-    <Slide noOverlay>
+  <div class="home" :class="[lightUp, contrasteOn]">
+    <Slide noOverlay :class="contrasteOn">
       <img class="logo-menu" src="../assets/images/logo-moderna.png" />
       <main id="page-wrap">
         <div @click="reiniciar">
@@ -71,10 +71,21 @@ export default {
   },
   computed: {
     lightUp() {
-      return this.$store.state.light;
+      if (!this.$store.state.light) {
+        return "light-off";
+      } else {
+        return "";
+      }
     },
     somOn() {
       return this.$store.state.som;
+    },
+    contrasteOn() {
+      if (this.$store.state.contraste) {
+        return "contraste-on";
+      } else {
+        return "";
+      }
     }
   },
   methods: {
@@ -116,6 +127,10 @@ export default {
 .home {
   color: #4a462a;
 
+  &.contraste-on {
+    background-color: black;
+  }
+
   &.light-off {
     background-color: #1a180e;
   }
@@ -128,9 +143,9 @@ export default {
 }
 .logo-page {
   position: absolute;
-  top: 16px;
+  top: 25px;
   left: 60px;
-  width: 12%;
+  width: 165px;
 }
 .logo-menu {
   transform: scale(0.8);
@@ -162,6 +177,15 @@ export default {
       margin-right: 30px;
       width: 30px;
     }
+  }
+}
+
+@media (max-width: 769px) {
+  .logo-page {
+    position: absolute;
+    top: 29px;
+    left: 44px;
+    width: 112px;
   }
 }
 </style>
