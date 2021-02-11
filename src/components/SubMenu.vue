@@ -7,11 +7,34 @@
         <span>Acessibilidade</span>
       </div>
       <div class="options alto-contraste">
-        <switches v-model="altoContraste" type-bold="true"></switches>
+        <toggle-button
+          v-model="altoContraste"
+          :color="{
+            checked: 'white',
+            unchecked: '#4a462a',
+            disabled: 'rgb(94 94 94)'
+          }"
+          :switch-color="{
+            checked: 'black',
+            unchecked: 'white'
+          }"
+        ></toggle-button>
         <div class="label-text">Alto Contraste</div>
       </div>
       <div class="options legenda">
-        <switches v-model="legenda" type-bold="true"></switches>
+        <toggle-button
+          v-model="legenda"
+          :disabled="true"
+          :color="{
+            checked: 'white',
+            unchecked: '#000000',
+            disabled: 'rgb(151 151 151)'
+          }"
+          :switch-color="{
+            checked: 'black',
+            unchecked: 'rgb(211 211 211);'
+          }"
+        ></toggle-button>
         <div class="label-text">Legenda</div>
       </div>
       <div class="atalhos">
@@ -58,7 +81,7 @@
 </template>
 
 <script>
-import Switches from "vue-switches";
+import { ToggleButton } from "vue-js-toggle-button";
 
 export default {
   props: {
@@ -72,7 +95,7 @@ export default {
     }
   },
   components: {
-    Switches
+    ToggleButton
   },
   data() {
     return {
@@ -107,7 +130,7 @@ export default {
   position: absolute;
   top: 120px;
   left: 0;
-  height: 468px;
+  height: 490px;
   width: 300px;
   background-color: white;
   display: flex;
@@ -166,12 +189,8 @@ export default {
     font-size: 18px;
     margin-bottom: 30px;
     .label-text {
-      margin-top: -15px;
+      margin-top: 0px;
     }
-  }
-
-  .alto-contraste {
-    margin-top: 15px;
   }
 
   .atalhos {

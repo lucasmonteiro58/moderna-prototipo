@@ -25,7 +25,9 @@
       </button>
     </div>
     <div v-if="index === 2" class="content-2">
-      <div class="title" :class="contrasteOn">Explicação itens</div>
+      <div class="title" :class="[!lightUp ? 'light-off' : '', contrasteOn]">
+        Explicação itens
+      </div>
       <div class="items-options" :class="contrasteOn">
         <div @click="goToItemA" class="alternativa-a">A</div>
         <div @click="goToItemB" class="alternativa-b">B</div>
@@ -190,6 +192,10 @@ export default {
       font-size: 1.4vw;
 
       &.contraste-on {
+        color: white;
+      }
+
+      &.light-off {
         color: white;
       }
     }

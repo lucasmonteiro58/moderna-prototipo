@@ -1,6 +1,13 @@
 <template>
   <div class="home" :class="[lightUp, contrasteOn]">
-    <Slide noOverlay :class="contrasteOn">
+    <Slide
+      :isOpen="isOpen"
+      @openMenu="handleOpenMenu"
+      @closeMenu="handleCloseMenu"
+      noOverlay
+      :class="contrasteOn"
+    >
+      <Menu />
       <img class="logo-menu" src="../assets/images/logo-moderna.png" />
       <main id="page-wrap">
         <div @click="reiniciar">
@@ -66,7 +73,8 @@ export default {
     return {
       showSubMenu: false,
       showPopUpCompartilhar: false,
-      subMenuIndex: 0
+      subMenuIndex: 0,
+      isOpen: false
     };
   },
   computed: {
@@ -88,10 +96,69 @@ export default {
       }
     }
   },
+  mounted() {
+    // this.$children.$on("openMenu", () => {
+    //   console.log("openmenuuuu");
+    // });
+
+    window.addEventListener(
+      "keydown",
+      function(e) {
+        if (e.altKey == true && e.keyCode === 79) {
+          this.handleOpenMenu();
+        } else if (e.altKey == true && e.keyCode === 67) {
+          this.handleCloseMenu();
+        } else if (e.altKey == true && e.keyCode === 65) {
+          this.toggleAcessibilidade();
+        } else if (e.altKey == true && e.keyCode === 88) {
+          this.handleClosePopUpCompartilhar();
+        }
+      }.bind(this)
+    );
+  },
   methods: {
     reiniciar() {
       this.closeLight();
       this.$emit("reiniciar");
+    },
+    handleOpenMenu() {
+      this.isOpen = true;
+    },
+    handleCloseMenu() {
+      this.isOpen = false;
+      this.showSubMenu = false;
+    },
+    toggleAcessibilidade() {
+      if (this.isOpen) {
+        if (this.showSubMenu && this.subMenuIndex === 0) {
+          this.showSubMenu = false;
+          this.subMenuIndex = 0;
+          this.handleCloseMenu();
+        } else if (this.showSubMenu && this.subMenuIndex !== 0) {
+          this.subMenuIndex = 0;
+        } else if (!this.showSubMenu) {
+          this.showSubMenu = true;
+          this.subMenuIndex = 0;
+        }
+      } else {
+        this.handleOpenMenu();
+        this.showSubMenu = true;
+        this.subMenuIndex = 0;
+      }
+      // if (this.isOpen && this.showSubMenu) {
+      //   this.isOpen = false;
+      //   this.showSubMenu = !this.showSubMenu;
+      //   this.subMenuIndex = 0;
+      // } else {
+      //   this.isOpen = true;
+      //   this.showSubMenu = !this.showSubMenu;
+      //   this.subMenuIndex = 0;
+      // }
+    },
+    handleClosePopUpCompartilhar() {
+      if (this.showPopUpCompartilhar) {
+        this.showPopUpCompartilhar = false;
+      }
     },
     openCompartilhar() {
       this.showPopUpCompartilhar = true;

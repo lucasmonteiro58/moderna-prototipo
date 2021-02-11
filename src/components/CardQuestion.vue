@@ -35,7 +35,9 @@
         <div class="alternativa-c">{{ question.alternativas[2].text }}</div>
         <div class="alternativa-d">{{ question.alternativas[3].text }}</div>
       </div>
-      <div class="qual-item">Qual item você acha ques está correto?</div>
+      <div class="qual-item">
+        Qual dos itens abaixo você acha que é o correto?
+      </div>
       <div class="form">
         <div class="items-options" :class="contrasteOn">
           <div
@@ -59,7 +61,7 @@
       :class="[!lightUp ? 'light-off' : '', contrasteOn]"
     >
       <div class="left-content" :class="contrasteOn">
-        <div class="btn-sair" @click="reiniciar">
+        <div class="btn-sair" @click="goToQuestion">
           <img src="../assets/images/icons/btn-sair.png" />
           <div>SAIR</div>
         </div>
@@ -146,6 +148,24 @@ export default {
   created() {
     this.$parent.$on("reiniciar", this.reiniciar);
   },
+  mounted() {
+    window.addEventListener(
+      "keydown",
+      function(e) {
+        if (e.altKey == true && e.keyCode === 88) {
+          this.handleClosePopUp();
+        } else if (e.shiftKey && e.key === "Tab") {
+          if (this.index > 0) {
+            this.index--;
+          }
+        } else if (e.key === "Tab") {
+          if (this.index < 2) {
+            this.index++;
+          }
+        }
+      }.bind(this)
+    );
+  },
   computed: {
     lightUp() {
       return this.$store.state.light;
@@ -170,6 +190,11 @@ export default {
     },
     closePopUpVideo() {
       this.showPopUpVideo = false;
+    },
+    handleClosePopUp() {
+      if (this.showPopUpVideo) {
+        this.showPopUpVideo = false;
+      }
     },
     reiniciar() {
       this.index = 0;
@@ -430,7 +455,7 @@ export default {
 
         div {
           cursor: pointer;
-          font-size: 35px;
+          font-size: 30px;
           font-family: SourceSansBold;
           color: white;
           display: flex;
@@ -438,8 +463,8 @@ export default {
           justify-content: center;
           background-color: #928c5d;
           border-radius: 50%;
-          width: 70px;
-          height: 70px;
+          width: 60px;
+          height: 60px;
 
           &.checked {
             background-color: #4a462a;
@@ -466,11 +491,11 @@ export default {
         text-transform: uppercase;
         border-radius: 18px;
         border: none;
-        font-size: 27px;
+        font-size: 26px;
         letter-spacing: 1px;
-        width: 250px;
+        width: 199px;
         color: white;
-        height: 70px;
+        height: 68px;
 
         &:hover {
           background-color: #0075a7;
@@ -528,6 +553,7 @@ export default {
         }
         div {
           font-size: 18px;
+          margin-top: 2px;
           font-family: SourceSansBold;
         }
       }
@@ -566,8 +592,9 @@ export default {
         align-items: center;
         height: 60px;
         img {
+          margin-top: -4px;
           margin-bottom: 5px;
-          width: 25px;
+          height: 30px;
         }
         div {
           font-size: 18px;
