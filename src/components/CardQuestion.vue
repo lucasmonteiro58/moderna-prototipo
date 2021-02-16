@@ -402,6 +402,7 @@ export default {
 
       img {
         max-height: 350px;
+        cursor: nwse-resize;
       }
 
       .imagem-font {
