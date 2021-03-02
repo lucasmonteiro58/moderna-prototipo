@@ -318,7 +318,7 @@ export default {
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 1025px) {
   .popup-content {
     width: 78%;
     height: 75%;

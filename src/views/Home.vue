@@ -285,7 +285,7 @@ export default {
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 1025px) {
   .logo-menu {
     transform: scale(0.6);
     margin-top: -38px;

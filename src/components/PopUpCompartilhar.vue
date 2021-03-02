@@ -157,7 +157,7 @@ export default {
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 1025px) {
   .card-compartilhe .card {
     width: 75vw;
   }

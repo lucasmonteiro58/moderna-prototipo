@@ -966,7 +966,7 @@ export default {
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 1025px) {
   ::-webkit-scrollbar {
     width: 5px;
   }

@@ -248,7 +248,7 @@ export default {
   }
 }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (max-width: 1025px) {
   .submenu {
     top: 56px;
   }
