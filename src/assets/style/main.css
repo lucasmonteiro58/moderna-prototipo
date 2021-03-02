@@ -34,3 +34,8 @@ button:active {
   font-family: Maven-Black;
   src: url("../fonts/MavenPro/MavenPro-Black.ttf");
 }
+
+body {
+  width: 100%;
+  height: 100%;
+}

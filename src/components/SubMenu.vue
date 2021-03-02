@@ -241,4 +241,34 @@ export default {
     color: white;
   }
 }
+
+@media (max-width: 769px) and (orientation: portrait) {
+  .submenu {
+    top: 75px;
+  }
+}
+
+@media (orientation: landscape) {
+  .submenu {
+    top: 56px;
+  }
+
+  .submenu .title {
+    height: 70px;
+    font-size: 18px;
+  }
+
+  .submenu .title .icon {
+    width: 25px;
+    margin-right: 15px;
+  }
+
+  .submenu .options .label-text {
+    font-size: 16px;
+  }
+
+  .submenu .atalhos .title-comando {
+    font-size: 18px;
+  }
+}
 </style>

@@ -2,28 +2,26 @@
   <div v-show="show" class="card-compartilhe" :class="contrasteOn">
     <div class="card">
       <img
-        @click="closeCompartilhar"
+        @click="closeVirar"
         class="btn-sair"
         src="../assets/images/icons/btn-sair-cinza.png"
       />
-      <div class="title-compartilhe">Compartilhe com seus amigos!</div>
-      <div class="link">
-        <vue-feather type="link" size="20"></vue-feather>
-        https://moderna-prototipo.netlify.app/
+      <img class="land" src="../assets/images/icons/land.png" />
+      <div class="title-compartilhe">
+        Vamos te explicar como respondemos a essa questão, mas para visualizar
+        melhor precisamos que você rotacione o celular na próxima tela. Vamos
+        lá? :)
       </div>
-      <button @click="copiar">
-        <span><vue-feather type="copy" size="18"></vue-feather></span>COPIAR
+      <button @click="closeVirar">
+        TUDO BEM, VAMOS!
       </button>
     </div>
   </div>
 </template>
 
 <script>
-import VueFeather from "vue-feather";
 export default {
-  components: {
-    VueFeather
-  },
+  components: {},
   props: {
     show: {
       type: Boolean,
@@ -40,11 +38,8 @@ export default {
     }
   },
   methods: {
-    closeCompartilhar() {
-      this.$emit("closeCompartilhar");
-    },
-    copiar() {
-      navigator.clipboard.writeText(" https://moderna-prototipo.netlify.app/");
+    closeVirar() {
+      this.$emit("closeVirar");
     }
   }
 };
@@ -70,7 +65,7 @@ export default {
     align-items: center;
     justify-content: center;
     width: 30vw;
-    height: 260px;
+    height: 360px;
     border-radius: 2vw;
     box-shadow: 1px 0px 6px 0px #9e9e9e;
     position: relative;
@@ -144,9 +139,9 @@ export default {
   }
 
   .card-compartilhe .card .title-compartilhe {
-    font-size: 23px;
-    margin-top: -10px;
-    width: 180px;
+    font-size: 17px;
+    margin-top: 0px;
+    width: 273px;
     text-align: center;
   }
 
@@ -154,12 +149,6 @@ export default {
     width: 279px;
     font-size: 13px;
     padding-bottom: 16px;
-  }
-}
-
-@media (orientation: landscape) {
-  .card-compartilhe .card {
-    width: 75vw;
   }
 }
 </style>

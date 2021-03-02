@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="pt_BR">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
     <title><%= htmlWebpackPlugin.options.title %></title>    
   </head>
@@ -95,7 +95,7 @@
     }
 
     .contraste-on > div > .bm-burger-button > .bm-burger-bars{
-      background-color: black;
+      background-color: white;
     }
 
     .contraste-on > div > .bm-menu > .bm-item-list > img  {
@@ -113,6 +113,49 @@
     .contraste-on > div > .bm-menu > .bm-item-list > #page-wrap > div > img  {
       filter: brightness(0) invert(1);
     }
+
+    @media (max-width: 1025px) and (orientation: landscape) {
+      .bm-burger-button {
+        top: 18px;
+      }
+    }
+
+    @media (max-width: 769px)  and (orientation: portrait) {
+      .bm-burger-button {
+        top: 20px;
+      }
+
+      .bm-burger-button {
+        width: 26px;
+        height: 21px;   
+      }
+
+      .line-style {
+        height: 3px;
+      }
+
+      .bm-menu {
+        height: 100vh;
+      }
+
+    } 
+    
+    @media (orientation: landscape) { 
+      .cross-style {   
+        top: 27px;
+        right: 2px;
+      }
+
+      .bm-burger-button {
+        width: 26px; 
+        height: 21px;  
+      }
+
+      .line-style {    
+         height: 3px;
+      }
+    }
     /* ------------------Menu-Burger */
+
   </style>
 </html>

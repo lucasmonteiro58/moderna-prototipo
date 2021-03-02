@@ -247,12 +247,64 @@ export default {
   }
 }
 
-@media (max-width: 769px) {
+@media (max-width: 1025px) and (orientation: landscape) {
+  .logo-page {
+    top: 14px;
+    left: 42px;
+    width: 118px;
+  }
+}
+
+@media (max-width: 769px) and (orientation: portrait) {
   .logo-page {
     position: absolute;
-    top: 29px;
+    top: 12px;
     left: 44px;
-    width: 112px;
+    width: 127px;
+  }
+
+  .home {
+    max-height: 100vh;
+  }
+
+  .logo-menu {
+    margin-top: -22px;
+    margin-left: 2px;
+  }
+
+  #page-wrap {
+    margin-top: 20px;
+  }
+
+  #page-wrap div {
+    height: 71px;
+  }
+
+  #page-wrap div img {
+    margin-right: 18px;
+  }
+}
+
+@media (orientation: landscape) {
+  .logo-menu {
+    transform: scale(0.6);
+    margin-top: -38px;
+    margin-left: -16px;
+  }
+
+  #page-wrap {
+    margin-top: 7px;
+  }
+
+  #page-wrap div {
+    font-size: 18px;
+    height: 60px;
+    padding-left: 22px;
+  }
+
+  #page-wrap div img {
+    margin-right: 20px;
+    width: 25px;
   }
 }
 </style>

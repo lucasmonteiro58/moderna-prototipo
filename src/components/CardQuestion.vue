@@ -1,111 +1,137 @@
 <template>
-  <section class="card-question">
-    <div v-if="index === 0" class="title-section" :class="contrasteOn">
-      <div class="container">
-        <div class="title">Congresso de Viena</div>
-        <div class="subtitle">- História -</div>
-      </div>
-      <img
-        class="seta-baixo"
-        src="../assets/images/icons/seta-baixo.png"
-        alt="baixo"
-        @click="goToQuestion()"
-      />
-    </div>
-    <div v-if="index === 1" class="question-section" :class="contrasteOn">
-      <div class="enunciado-texto">
-        {{ question.enunciado.texto }}
-      </div>
-      <div class="enunciado-fonte">{{ question.enunciado.fonte }}</div>
-      <div class="enunciado-acesso">{{ question.enunciado.acesso }}</div>
-      <div class="imagem">
-        <img
-          :src="question.imagem.link"
-          :alt="question.imagem.title"
-          @click="show"
-        />
-        <div class="imagem-font">
-          {{ question.imagem.fonte }} <span> {{ question.imagem.acesso }}</span>
+  <span>
+    <section class="card-question">
+      <div v-if="index === 0" class="title-section" :class="contrasteOn">
+        <div class="container">
+          <div class="title">Congresso de Viena</div>
+          <div class="subtitle">- História -</div>
         </div>
+        <img
+          class="seta-baixo"
+          src="../assets/images/icons/seta-baixo.png"
+          alt="baixo"
+          @click="goToQuestion()"
+        />
       </div>
-      <div class="quention-pergunta">{{ question.pergunta }}</div>
-      <div class="question-alternativas" :class="contrasteOn">
-        <div class="alternativa-a">{{ question.alternativas[0].text }}</div>
-        <div class="alternativa-b">{{ question.alternativas[1].text }}</div>
-        <div class="alternativa-c">{{ question.alternativas[2].text }}</div>
-        <div class="alternativa-d">{{ question.alternativas[3].text }}</div>
-      </div>
-      <div class="qual-item">
-        Qual dos itens abaixo você acha que é o correto?
-      </div>
-      <div class="form">
-        <div class="items-options" :class="contrasteOn">
-          <div
-            v-for="(item, index) in question.alternativas"
-            :key="index"
-            class="item"
-            @click="checkOption(item.nome)"
-            :class="{ checked: item.checked }"
-          >
-            {{ item.nome }}
+      <div v-if="index === 1" class="question-section" :class="contrasteOn">
+        <div class="enunciado-texto">
+          {{ question.enunciado.texto }}
+        </div>
+        <div class="enunciado-fonte">{{ question.enunciado.fonte }}</div>
+        <div class="enunciado-acesso">{{ question.enunciado.acesso }}</div>
+        <div class="imagem">
+          <img
+            :src="question.imagem.link"
+            :alt="question.imagem.title"
+            @click="show"
+          />
+          <div class="imagem-font">
+            {{ question.imagem.fonte }}
+            <span> {{ question.imagem.acesso }}</span>
           </div>
         </div>
-        <button @click="goToVideo" class="btn-conferir" :class="contrasteOn">
-          Conferir
-        </button>
-      </div>
-    </div>
-    <div
-      v-if="index === 2"
-      class="video-section"
-      :class="[!lightUp ? 'light-off' : '', contrasteOn]"
-    >
-      <div class="left-content" :class="contrasteOn">
-        <div class="btn-sair" @click="goToQuestion">
-          <img src="../assets/images/icons/btn-sair.png" />
-          <div>SAIR</div>
+        <div class="quention-pergunta">{{ question.pergunta }}</div>
+        <div class="question-alternativas" :class="contrasteOn">
+          <div class="alternativa-a">{{ question.alternativas[0].text }}</div>
+          <div class="alternativa-b">{{ question.alternativas[1].text }}</div>
+          <div class="alternativa-c">{{ question.alternativas[2].text }}</div>
+          <div class="alternativa-d">{{ question.alternativas[3].text }}</div>
+        </div>
+        <div class="qual-item">
+          Qual dos itens abaixo você acha que é o correto?
+        </div>
+        <div class="form">
+          <div class="items-options" :class="contrasteOn">
+            <div
+              v-for="(item, index) in question.alternativas"
+              :key="index"
+              class="item"
+              @click="checkOption(item.nome)"
+              :class="{ checked: item.checked }"
+            >
+              {{ item.nome }}
+            </div>
+          </div>
+          <button @click="goToVideo" class="btn-conferir" :class="contrasteOn">
+            Conferir
+          </button>
         </div>
       </div>
-      <div class="mid-content">
-        <Video
-          :current-video="currentVideo"
-          @videoPlay="videoPlay"
-          @videoPause="videoPause"
-          @videoEnd="videoEnd"
-        ></Video>
-        <div v-if="showPopUpVideo" class="popup-video">
-          <PopUpVideo
-            @close="closePopUpVideo"
-            :index="indexPopUpVideo"
-            @gotoTexto="goToTexto()"
-            @gotoEnunciado="goToEnunciado()"
-            @gotoItemA="goToItemA()"
-            @gotoItemB="goToItemB()"
-            @gotoItemC="goToItemC()"
-            @gotoItemD="goToItemD()"
-            @gotoEncerramento="goToEncerramento()"
-            @gotoIntroducao="goToIntroducao()"
-            @gotoSair="reiniciar()"
-          ></PopUpVideo>
+      <div v-if="index === 2" class="video-container-glob">
+        <div class="info-rotacione">
+          <img src="../assets/images/icons/land-black.png" />
+          <p>Rotacione seu celular para ter melhor visualização</p>
+        </div>
+
+        <div
+          v-if="index === 2"
+          class="video-section"
+          :class="[!lightUp ? 'light-off' : '', contrasteOn]"
+        >
+          <div class="left-content" :class="contrasteOn">
+            <div class="btn-sair" @click="goToQuestion">
+              <img src="../assets/images/icons/btn-sair.png" />
+              <div>SAIR</div>
+            </div>
+          </div>
+          <div class="mid-content">
+            <Video
+              :current-video="currentVideo"
+              @videoPlay="videoPlay"
+              @videoPause="videoPause"
+              @videoEnd="videoEnd"
+            ></Video>
+            <div v-if="showPopUpVideo" class="popup-video">
+              <PopUpVideo
+                @close="closePopUpVideo"
+                :index="indexPopUpVideo"
+                @gotoTexto="goToTexto()"
+                @gotoEnunciado="goToEnunciado()"
+                @gotoItemA="goToItemA()"
+                @gotoItemB="goToItemB()"
+                @gotoItemC="goToItemC()"
+                @gotoItemD="goToItemD()"
+                @gotoEncerramento="goToEncerramento()"
+                @gotoIntroducao="goToIntroducao()"
+                @gotoSair="reiniciar()"
+              ></PopUpVideo>
+            </div>
+          </div>
+          <div class="right-content" :class="contrasteOn">
+            <div class="btn-luz" @click="closeLight">
+              <img src="../assets/images/icons/luz.png" />
+              <div>LUZ</div>
+            </div>
+          </div>
+        </div>
+        <div v-if="index === 2" class="buttons-port">
+          <div class="btn-sair" @click="goToQuestion">
+            <img src="../assets/images/icons/btn-sair.png" />
+            <div>SAIR</div>
+          </div>
+          <div class="btn-luz" @click="closeLight">
+            <img src="../assets/images/icons/luz.png" />
+            <div>LUZ</div>
+          </div>
         </div>
       </div>
-      <div class="right-content" :class="contrasteOn">
-        <div class="btn-luz" @click="closeLight">
-          <img src="../assets/images/icons/luz.png" />
-          <div>LUZ</div>
-        </div>
-      </div>
-    </div>
-    <viewer :images="images" @inited="inited" class="viewer" ref="viewer">
-      <img v-for="src in images" :src="src" :key="src" class="none" />
-    </viewer>
-  </section>
+
+      <viewer :images="images" @inited="inited" class="viewer" ref="viewer">
+        <img v-for="src in images" :src="src" :key="src" class="none" />
+      </viewer>
+    </section>
+    <PopUpVirar
+      :show="showPopUpVirar"
+      @closeVirar="closePopUpVirar"
+    ></PopUpVirar>
+  </span>
 </template>
 
 <script>
 import { question, videos } from "../consts/index";
 import Video from "../components/Video";
 import PopUpVideo from "../components/PopUpVideo";
+import PopUpVirar from "../components/PopUpVirar";
 
 import "viewerjs/src/css/viewer.scss";
 import Viewer from "v-viewer";
@@ -132,7 +158,8 @@ export default {
   props: {},
   components: {
     Video,
-    PopUpVideo
+    PopUpVideo,
+    PopUpVirar
   },
   data() {
     return {
@@ -140,6 +167,7 @@ export default {
       index: 0,
       images: [question.imagem.link],
       showPopUpVideo: false,
+      showPopUpVirar: false,
       indexPopUpVideo: 0,
       videos,
       currentVideo: videos.introducao
@@ -182,6 +210,10 @@ export default {
     inited(viewer) {
       this.$viewer = viewer;
     },
+    closePopUpVirar() {
+      this.showPopUpVirar = false;
+      this.index = 2;
+    },
     closeLight() {
       this.$store.commit("changeLight", !this.lightUp);
     },
@@ -207,7 +239,19 @@ export default {
       this.index = 1;
     },
     goToVideo() {
-      this.index = 2;
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        if (window.innerHeight > window.innerWidth) {
+          this.showPopUpVirar = true;
+        } else {
+          this.index = 2;
+        }
+      } else {
+        this.index = 2;
+      }
     },
     desmarcar() {
       for (let i = 0; i < this.question.alternativas.length; i++) {
@@ -299,11 +343,73 @@ export default {
 .none {
   display: none;
 }
+
+.info-rotacione {
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 20px;
+
+  p {
+    width: 190px;
+    font-size: 12px;
+    text-align: end;
+    font-family: SourceSansBold;
+    margin-bottom: -30px;
+  }
+
+  img {
+    margin-bottom: 5px;
+    width: 30px;
+  }
+}
+
+.buttons-port {
+  margin-top: 20px;
+  width: 100%;
+  display: none;
+  justify-content: space-between;
+  padding: 0 10px;
+
+  .btn-sair {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60px;
+    img {
+      margin-bottom: 5px;
+      width: 18px;
+    }
+    div {
+      font-size: 15px;
+      margin-top: -2px;
+      font-family: SourceSansBold;
+    }
+  }
+
+  .btn-luz {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60px;
+    img {
+      margin-top: -4px;
+      margin-bottom: 1px;
+      height: 21px;
+    }
+    div {
+      font-size: 15px;
+      font-family: SourceSansBold;
+    }
+  }
+}
 .card-question {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 20;
   color: #4a462a;
   .title-section {
     background-color: white;
@@ -311,7 +417,7 @@ export default {
     flex-direction: column;
     align-items: center;
     width: 40vw;
-    height: 380px;
+    height: 45vh;
     border: 8px solid #4a462a;
     border-radius: 3vw;
 
@@ -523,6 +629,7 @@ export default {
     background-color: white;
     padding: 0px 0px;
     font-size: 25px;
+    margin-top: 45px;
 
     &.contraste-on {
       background-color: black;
@@ -687,28 +794,79 @@ export default {
   }
 }
 
-@media (max-width: 769px) {
+@media (max-width: 1025px) and (orientation: landscape) {
+  .card-question .title-section .container .title {
+    font-size: 4vw;
+  }
+
   .card-question .title-section {
-    width: 75vw !important;
-    height: 245px;
+    border: 6px solid #4a462a;
+  }
+
+  .card-question .title-section .container {
+    border-bottom: 6px solid #4a462a;
   }
 
   .card-question .title-section .seta-baixo {
-    width: 96px;
-    margin-top: 23px;
+    width: 69px;
+    margin-top: 25px;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 769px) and (orientation: portrait) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 2px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }
+
+  .card-question .title-section {
+    width: 75vw !important;
+    height: 360px;
+    border: 6px solid #4a462a;
+    border-radius: 17vw;
+  }
+
+  .card-question .title-section .container {
+    border-bottom: 6px solid #4a462a;
+  }
+
+  .card-question .title-section .container .title {
+    font-size: 32px;
+    width: 200px;
+  }
+
+  .card-question .title-section .container .subtitle {
+    margin-top: 20px;
+    font-size: 26px;
+  }
+
+  .card-question .title-section .seta-baixo {
+    width: 77px;
+    margin-top: 34px;
     margin-bottom: 10px;
   }
 
   .card-question .question-section {
-    padding: 40px 40px;
+    padding: 25px 18px;
+    font-size: 18px;
+    border-radius: 8vw;
+    width: 82vw;
+    height: 75vh;
   }
 
   .card-question .question-section .enunciado-fonte {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .card-question .question-section .enunciado-acesso {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .card-question .question-section .imagem {
@@ -720,15 +878,28 @@ export default {
   }
 
   .card-question .question-section .quention-pergunta {
-    margin-top: 42px;
+    margin: 0px 10px;
+    margin-top: 30px;
   }
 
   .card-question .question-section .question-alternativas div {
-    padding: 13px 20px;
+    margin: 16px 0;
+    padding: 8px 12px;
+    border: 1px solid #4a462ac2;
+  }
+
+  .card-question .question-section .qual-item {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .card-question .question-section .form {
+    flex-direction: column;
+    align-items: center;
   }
 
   .card-question .question-section .form .items-options {
-    width: 190px;
+    width: 210px;
   }
 
   .card-question .question-section .form .items-options div {
@@ -739,8 +910,11 @@ export default {
 
   .card-question .question-section .form .btn-conferir {
     font-size: 19px;
-    width: 192px;
+    width: 168px;
     height: 45px;
+    margin-top: 33px;
+    border-radius: 25px;
+    margin-bottom: 150px;
   }
 
   .card-question .video-section .left-content .btn-sair img {
@@ -758,8 +932,101 @@ export default {
   .card-question .video-section .right-content .btn-luz {
     margin-top: 24px;
   }
+
+  .card-question .video-section .left-content {
+    width: 20px;
+  }
+
+  .card-question .video-section .left-content {
+    width: 20px;
+  }
+
+  .card-question .video-section .right-content {
+    width: 20px;
+  }
+
+  .card-question .video-section .mid-content {
+    width: 85vw;
+  }
+
+  .card-question .video-section .left-content .btn-sair {
+    display: none;
+  }
+
+  .card-question .video-section .right-content .btn-luz {
+    display: none;
+  }
+
+  .buttons-port {
+    display: flex;
+  }
+
+  .info-rotacione {
+    display: flex;
+  }
 }
 
-@media (min-width: 426px) {
+@media (orientation: landscape) {
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 2px;
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }
+  .card-question .question-section {
+    padding: 20px 25px;
+    margin-top: 30px;
+    width: 80vw;
+    font-size: 16px;
+  }
+
+  .card-question .question-section .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-question .question-section .qual-item {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .card-question .question-section .form .btn-conferir {
+    margin-top: 35px;
+    margin-bottom: 80px;
+  }
+
+  .card-question .video-section .left-content {
+    width: 64px;
+  }
+
+  .card-question .video-section .right-content {
+    width: 64px;
+  }
+
+  .card-question .video-section .mid-content {
+    width: 62vw;
+  }
+
+  .card-question .video-section {
+    margin-top: 50px;
+  }
+
+  .card-question .video-section .right-content .btn-luz img {
+    height: 25px;
+  }
+
+  .card-question .title-section {
+    margin-top: 32px;
+    height: 60vh;
+  }
+
+  .card-question .question-section .question-alternativas div {
+    padding: 14px 23px;
+  }
 }
 </style>

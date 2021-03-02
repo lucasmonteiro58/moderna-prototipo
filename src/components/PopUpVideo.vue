@@ -284,18 +284,67 @@ export default {
   }
 }
 
-@media (max-width: 769px) {
-  .popup-content .content-2 .items-options {
-    width: 150px;
+@media (max-width: 769px) and (orientation: portrait) {
+  .popup-content {
+    width: 95%;
+    height: 150%;
   }
-
-  .popup-content .content-2 .items-options div {
-    width: 25px;
-    height: 25px;
+  .popup-content .content-2 .items-options {
+    width: 180px;
   }
 
   .popup-content .content-2 .buttons-section button {
     width: 118px;
+  }
+
+  .popup-content .content-0 button,
+  .popup-content .content-1 button,
+  .popup-content .content-3 button {
+    font-size: 15px;
+  }
+
+  .popup-content .content-2 .title {
+    font-size: 15px;
+  }
+
+  .popup-content .content-2 .items-options div {
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+  }
+
+  .popup-content .content-2 .buttons-section button {
+    font-size: 15px;
+  }
+}
+
+@media (orientation: landscape) {
+  .popup-content {
+    width: 78%;
+    height: 75%;
+    margin-top: -22px;
+  }
+
+  .popup-content .content-0 button,
+  .popup-content .content-1 button,
+  .popup-content .content-3 button {
+    font-size: 13px;
+  }
+
+  .popup-content .content-2 .title {
+    font-size: 16px;
+  }
+
+  .popup-content .content-2 .items-options div {
+    font-size: 15px;
+  }
+
+  .popup-content .content-2 .buttons-section button {
+    font-size: 13px;
+  }
+
+  .popup-content .content-2 .buttons-section {
+    margin-top: 15px;
   }
 }
 </style>

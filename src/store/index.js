@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     light: true,
     som: true,
-    contraste: false
+    contraste: false,
+    landscape: false
   },
   mutations: {
     changeLight(state, newState) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     changeContraste(state, newState) {
       state.contraste = newState;
+    },
+    changeLandscape(state, newState) {
+      state.landscape = newState;
     }
   },
   actions: {},

@@ -9,11 +9,17 @@
 </template>
 
 <style lang="css">
+#app {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+}
 .bg-top-left {
   position: absolute;
   width: 30%;
   top: 0;
   left: 0;
+  z-index: -1;
 }
 
 .bg-top-right {
@@ -21,6 +27,7 @@
   width: 15%;
   top: 0;
   right: 0;
+  z-index: -1;
 }
 
 .bg-bottom-left {
@@ -28,6 +35,7 @@
   bottom: 0;
   left: 0;
   width: 15%;
+  z-index: -1;
 }
 
 .bg-bottom-right {
@@ -35,5 +43,39 @@
   bottom: 0;
   right: 0;
   width: 35%;
+  z-index: -1;
+}
+
+@media (max-width: 1025px) and (orientation: landscape) {
+  .bg-top-left {
+    width: 40%;
+  }
+
+  .bg-bottom-right {
+    width: 60%;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 769px) and (orientation: portrait) {
+  .bg-top-left {
+    width: 90%;
+  }
+
+  .bg-top-right {
+    width: 50%;
+    top: 10%;
+    right: -10%;
+  }
+
+  .bg-bottom-left {
+    bottom: 0;
+    left: -10%;
+    width: 50%;
+  }
+
+  .bg-bottom-right {
+    width: 80%;
+  }
 }
 </style>
