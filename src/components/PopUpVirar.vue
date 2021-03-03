@@ -133,6 +133,23 @@ export default {
   }
 }
 
+@media (orientation: landscape) and (max-width: 1025px) {
+  .card-compartilhe .card {
+    width: 73vw;
+  }
+
+  .card-compartilhe .card .title-compartilhe {
+    font-family: SourceSansBold;
+    font-size: 16px;
+    text-align: center;
+    padding: 0 15px;
+  }
+
+  .card-compartilhe .card {
+    height: 300px;
+  }
+}
+
 @media (max-width: 769px) and (orientation: portrait) {
   .card-compartilhe .card {
     width: 90vw;

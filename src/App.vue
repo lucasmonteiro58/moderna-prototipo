@@ -19,7 +19,6 @@
   width: 30%;
   top: 0;
   left: 0;
-  z-index: -1;
 }
 
 .bg-top-right {
@@ -27,7 +26,6 @@
   width: 15%;
   top: 0;
   right: 0;
-  z-index: -1;
 }
 
 .bg-bottom-left {
@@ -35,7 +33,6 @@
   bottom: 0;
   left: 0;
   width: 15%;
-  z-index: -1;
 }
 
 .bg-bottom-right {
@@ -43,7 +40,6 @@
   bottom: 0;
   right: 0;
   width: 35%;
-  z-index: -1;
 }
 
 @media (max-width: 1025px) and (orientation: landscape) {

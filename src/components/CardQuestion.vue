@@ -411,6 +411,7 @@ export default {
   justify-content: center;
   z-index: 20;
   color: #4a462a;
+  position: relative;
   .title-section {
     background-color: white;
     display: flex;
@@ -1027,6 +1028,14 @@ export default {
 
   .card-question .question-section .question-alternativas div {
     padding: 14px 23px;
+  }
+
+  .card-question .video-section .left-content .btn-sair {
+    margin-top: 20px;
+  }
+
+  .card-question .video-section .right-content .btn-luz {
+    margin-top: 20px;
   }
 }
 </style>
